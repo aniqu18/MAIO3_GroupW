@@ -6,27 +6,27 @@ import numpy as np
 from pathlib import Path
 
 from sklearn.datasets import load_diabetes
+from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVR
 from sklearn.pipeline import Pipeline
 from sklearn.utils import check_random_state
 
 
 def train_and_evaluate(X, y, random_state=42):
     """
-    Train an SVR regression model on diabetes data and evaluate RMSE.
+    Train an linear regression model on diabetes data and evaluate RMSE.
     """
     # train/test split
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=random_state
     )
 
-    # build pipeline: scaler + SVM regressor
+    # build pipeline: scaler + linear regression
     pipeline = Pipeline([
         ("scaler", StandardScaler()),
-        ("regressor", SVR(kernel="rbf", C=1.0, epsilon=0.2))
+        ("regressor", LinearRegression())
     ])
 
     # fit model
@@ -42,11 +42,7 @@ def train_and_evaluate(X, y, random_state=42):
         "rmse": float(rmse),
         "n_train": len(X_train),
         "n_test": len(X_test),
-        "random_state": random_state,
-        "model_type": "SVR",
-        "kernel": "rbf",
-        "C": 1.0,
-        "epsilon": 0.2
+        "model_type": "LinearRegression",
     }
 
     return pipeline, metrics
@@ -69,7 +65,7 @@ def save_metrics(metrics: dict, output_path: Path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Train baseline SVR diabetes model")
+    parser = argparse.ArgumentParser(description="Train baseline LR diabetes model")
     parser.add_argument("--model-out", type=str, default="app/artifacts/model.pkl",
                         help="Path to save trained model pickle")
     parser.add_argument("--metrics-out", type=str, default="app/artifacts/metrics.json",
