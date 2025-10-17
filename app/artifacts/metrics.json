@@ -1,0 +1,10 @@
+{
+  "rmse": 65.81039161226353,
+  "n_train": 353,
+  "n_test": 89,
+  "random_state": 42,
+  "model_type": "SVR",
+  "kernel": "rbf",
+  "C": 1.0,
+  "epsilon": 0.2
+}
