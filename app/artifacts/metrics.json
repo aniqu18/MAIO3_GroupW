@@ -1,10 +1,6 @@
 {
-  "rmse": 65.81039161226353,
+  "rmse": 53.85344583676594,
   "n_train": 353,
   "n_test": 89,
-  "random_state": 42,
-  "model_type": "SVR",
-  "kernel": "rbf",
-  "C": 1.0,
-  "epsilon": 0.2
+  "model_type": "LinearRegression"
 }
